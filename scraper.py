@@ -176,7 +176,7 @@ def main():
         # Position the window
         root.geometry(f"+{OVERLAY['x']}+{OVERLAY['y']}")
         
-        label = tk.Label(root, text="Overlay Active...", font=("Arial", OVERLAY['font_size'], "bold"), fg=OVERLAY['color'], bg=transparent_color)
+        label = tk.Label(root, text="[Overlay Active]", font=("Arial", OVERLAY['font_size'], "bold"), fg=OVERLAY['color'], bg=transparent_color)
         label.pack()
         
         # Check queue periodically

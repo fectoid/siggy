@@ -52,7 +52,7 @@ Start the scraper by running:
 python scraper.py
 ```
 
-- When the script starts, you will see a temporary **"Overlay Active..."** message appear on your screen to confirm the overlay is working. 
+- When the script starts, you will see a temporary **"[Overlay Active]"** message appear on your screen to confirm the overlay is working. 
 - It will then continuously scan the configured region.
 - When it reads a number that matches a value in `signatures.csv`, it will display the match on the overlay.
 - If the number disappears or changes to an unknown value, the overlay will clear itself after 2 seconds.
@@ -62,6 +62,6 @@ To stop the script, press `Ctrl+C` in the terminal.
 ## Troubleshooting
 
 - **The overlay doesn't appear at all**: Ensure your game is set to **Windowed** or **Borderless Windowed / Windowed Fullscreen** mode. Standard Windows overlays cannot render on top of applications running in *Exclusive Fullscreen*.
-- **The text stays "Overlay Active..." forever**: This means the script hasn't successfully read a matching number yet. Check your `MONITOR` coordinates to ensure it's capturing the right area.
+- **The text stays "[Overlay Active]" forever**: This means the script hasn't successfully read a matching number yet. Check your `MONITOR` coordinates to ensure it's capturing the right area.
 - **The OCR is misreading numbers**: You may need to tweak the image preprocessing settings. Open `scraper.py` and modify the OpenCV `cv2.threshold` parameters inside the `preprocess_image()` function to better suit the text color and background of your game.
 - **Tesseract Error**: If you get a "tesseract is not installed or it's not in your PATH" error, double-check that the `tesseract_cmd` path in `scraper.py` perfectly matches the location of `tesseract.exe` on your hard drive.
