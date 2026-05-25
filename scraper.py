@@ -116,14 +116,21 @@ def preprocess_image(img):
     """
     Preprocess the image to improve OCR accuracy.
     """
-    # Convert from BGRA (mss default) to Grayscale
+    # Convert from BGRA to Grayscale
     gray = cv2.cvtColor(img, cv2.COLOR_BGRA2GRAY)
     
-    # Scale up the image to improve OCR of small text
-    gray = cv2.resize(gray, None, fx=2, fy=2, interpolation=cv2.INTER_CUBIC)
+    # Scale up the image significantly (3x or 4x often works better than 2x for small text)
+    gray = cv2.resize(gray, None, fx=3, fy=3, interpolation=cv2.INTER_CUBIC)
     
-    # Apply thresholding
-    _, thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
+    # Apply automatic thresholding (also consider cv2.THRESH_BINARY_INV for inverted colours)
+    _, thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+    
+    # --- NEW: Morphological cleaning ---
+    # Create a small 2x2 kernel
+    kernel = np.ones((2, 2), np.uint8)
+    
+    # Use MORPH_OPEN to remove isolated noise spots and crisp up digit loops
+    thresh = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, kernel)
     
     return thresh
 
@@ -155,7 +162,8 @@ def scraper_worker(signatures_lookup, gui_queue):
                     # Ensure Tesseract path is set from config
                     pytesseract.pytesseract.tesseract_cmd = CONFIG['tesseract_cmd']
                     
-                    custom_config = r'--oem 3 --psm 7 -c tessedit_char_whitelist=0123456789'
+                    # --psm 7 (Treat the image as a single text line) or --psm 8 (Treat the image as a single word).
+                    custom_config = r'--oem 3 --psm 8 -c tessedit_char_whitelist=0123456789'
                     text = pytesseract.image_to_string(processed_img, config=custom_config).strip()
                     
                     if text and text in signatures_lookup:
