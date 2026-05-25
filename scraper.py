@@ -163,7 +163,7 @@ def scraper_worker(signatures_lookup, gui_queue):
                     pytesseract.pytesseract.tesseract_cmd = CONFIG['tesseract_cmd']
                     
                     # --psm 7 (Treat the image as a single text line) or --psm 8 (Treat the image as a single word).
-                    custom_config = r'--oem 3 --psm 8 -c tessedit_char_whitelist=0123456789'
+                    custom_config = r'--oem 1 --psm 8 -c tessedit_char_whitelist=0123456789'
                     text = pytesseract.image_to_string(processed_img, config=custom_config).strip()
                     
                     if text and text in signatures_lookup:
