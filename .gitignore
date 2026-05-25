@@ -15,6 +15,7 @@ dist/
 
 # dotenv environment variable files
 .env
+config.json
 
 # Virtual environments
 .venv
@@ -46,7 +47,8 @@ htmlcov/
 ._*
 
 # Custom folder icons
-Icon
+Icon
+
 
 # Volume root files
 .DocumentRevisions-V100
