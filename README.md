@@ -1,8 +1,8 @@
-# Siggy: Screen Signature Pinger & Overlay
+# Siggy: Signature Helper
 
-This project is a Python-based screen scraping utility that continuously captures a specific region of your screen, uses Optical Character Recognition (OCR) to read a numeric value, and matches it against a known list of signatures in `signatures.csv`. When a match is found, it displays the corresponding material name and tier as a click-through, transparent overlay on your screen.
+This project is a Python-based screen scraping utility for use with Star Citizen where you want to instantly identify radar ping signatures without having to memorize the numeric values for different ores or materials.
 
-It is particularly useful for games (like Star Citizen) where you want to instantly identify radar ping signatures without having to memorize the numeric values for different ores or materials.
+It continuously captures a specific region of your screen, uses Optical Character Recognition (OCR) to read a numeric value, and matches it against a known list of signatures in `signatures.csv`. When a match is found, it displays the corresponding material name and tier as a click-through, transparent overlay on your screen.
 
 ## Features
 - **Real-time OCR**: Captures a specified screen region twice a second.
